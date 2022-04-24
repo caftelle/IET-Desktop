@@ -25,6 +25,8 @@ Version 1.0.4 Performance Updates Thu 14 Apr 05.06 P.M.
 
 Version 1.0.5 Text Reading Performance Update Sun 17 Apr 11.20 A.M.
 
+Version 2 Create UI Sun 24 Apr 10.13 P.M.
+
 ##########################################################
 
 | D e v e l o p e d by C a f t e l l e
