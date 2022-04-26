@@ -12,6 +12,13 @@
 
 # Kütüphaneler
 
+
+
+
+
+
+from pydub import AudioSegment
+from pydub.playback import play
 import sys
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QWidget
@@ -34,7 +41,6 @@ import mimetypes
 from email.message import EmailMessage
 import smtplib
 import time
-import beepy as beep
 import cv2
 from ui_main_window import *
 import threading
@@ -42,8 +48,11 @@ from threading import Thread
 import atexit
 import faulthandler
 
-
-
+#Sesler
+alarmsound = AudioSegment.from_wav("alarm.wav")
+mailgondersound = AudioSegment.from_wav("mailgonder.wav")
+qrsound = AudioSegment.from_wav("qr.wav")
+textsound = AudioSegment.from_wav("text.wav")
 
 class Ui(QWidget):
     
@@ -94,15 +103,16 @@ class Ui(QWidget):
                 self.mfg_print_and_show("Dosya silindi!")
                 tarananisemri2 = 'Taranan_Is_Emirleri.xlsx'
                 os.remove(tarananisemri2)
-                beep.beep(3)
+                play(textsound)
             else:
                 self.excelAc = False
                 self.mfg_print_and_show("Dosya silinmedi!")
-                beep.beep(3)
+                play(alarmsound)
         except Exception as e:
             self.excelAc = False
             print(e)
             self.mfg_print_and_show('Dosya zaten silinmiş.')
+            play(alarmsound)
             return False
 
     def taramaYapF(self):
@@ -166,7 +176,7 @@ class Ui(QWidget):
                 with open('TutanakForm.xlsm', 'wb') as output:
                     output.write(resp.content)
                     self.mfg_print_and_show('İndirme Tamamlandı.')
-                    beep.beep(5)
+                    play(textsound)
 
                 break
 
@@ -290,7 +300,7 @@ class Ui(QWidget):
                 qrtemiz2 = obj.data.decode('utf-8')
                 cv.putText(self.image, str(qrtemiz2), (200, 200), font, 1,
                         (0, 255, 160), 2)
-                beep.beep(1)
+                play(qrsound)
 
             self.mfg_print_and_show(
                 'Müşteri No, Hizmet No, İş Emri No Taranıyor...\nİş Emri Türü bir sonraki aşamada taranacak.')
@@ -936,7 +946,7 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı. Manuel Düzeltme Gerekiyor.')
-                beep.beep(5)
+                play(textsound)
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
                 break
 
@@ -969,7 +979,7 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                beep.beep(5)
+                play(textsound)
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
                 break
 
@@ -1001,7 +1011,7 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                beep.beep(5)
+                play(textsound)
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
                 break
 
@@ -1033,7 +1043,7 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                beep.beep(5)
+                play(textsound)
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
                 break
 
@@ -1065,7 +1075,7 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                beep.beep(5)
+                play(textsound)
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
                 break
 
@@ -1097,7 +1107,7 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                beep.beep(5)
+                play(textsound)
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
                 break
 
@@ -1129,7 +1139,7 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                beep.beep(5)
+                play(textsound)
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
                 break
 
@@ -1161,7 +1171,7 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                beep.beep(5)
+                play(textsound)
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
 
                 break
@@ -1194,7 +1204,7 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                beep.beep(5)
+                play(textsound)
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
                 break
             if 'CİHAZ KİRALAMA İPTAL' in iptalturu:
@@ -1225,7 +1235,7 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                beep.beep(5)
+                play(textsound)
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
                 break
 
@@ -1257,7 +1267,7 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                beep.beep(5)
+                play(textsound)
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
                 break
 
@@ -1289,7 +1299,7 @@ class Ui(QWidget):
                 self.iptalline = self.iptalline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                beep.beep(5)
+                play(textsound)
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
                 break
 
@@ -1321,7 +1331,7 @@ class Ui(QWidget):
                 self.iptalline = self.iptalline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                beep.beep(5)
+                play(textsound)
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
                 break
 
@@ -1353,7 +1363,7 @@ class Ui(QWidget):
                 self.iptalline = self.iptalline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                beep.beep(5)
+                play(textsound)
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
                 break
 
@@ -1385,7 +1395,7 @@ class Ui(QWidget):
                 self.iptalline = self.iptalline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                beep.beep(5)
+                play(textsound)
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
                 break
 
@@ -1476,18 +1486,18 @@ class Ui(QWidget):
                 print('Gönderilen Mail Adresi: '+ recipient +'\nMail başarı ile gönderildi.')
                 self.mfg_print_and_show('Gönderilen Mail Adresi: '+ recipient +'\nMail başarı ile gönderildi.')
                 self.dosyasilme()
-                beep.beep(5)
+                play(mailgondersound)
 
             else:
                 print('Dosya bulunamadığı için mail gönderilemedi.')
                 self.mfg_print_and_show('Dosya bulunamadığı için mail gönderilemedi.')
-                beep.beep(3)
+                play(alarmsound)
 
         except Exception as e: 
             print(e)
             print('Mail Adresini veya Kullanıcı Adı yanlış olduğu için mail gönderilemedi.')
             self.mfg_print_and_show('Mail Adresini veya Kullanıcı Adı yanlış olduğu için mail gönderilemedi.')
-            beep.beep(3)
+            play(alarmsound)
                 
         self.uiMailGonder.setEnabled(True)
         self.taramaYap.setEnabled(True)
