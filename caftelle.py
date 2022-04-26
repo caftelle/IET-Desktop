@@ -1,12 +1,22 @@
+###########################################################################
+########################## DEVELOPED BY CAFTELLE ##########################
+########################## DEVELOPED BY CAFTELLE ##########################
+########################## DEVELOPED BY CAFTELLE ##########################
+###########################################################################
+################################# I E T ###################################
+######################## V E R S I O N  2 . 0 . 0 #########################
+###########################################################################
+###########################################################################
+################## Caftelle Created by Furkan ARINCI ######################
+###########################################################################
+
 # Kütüphaneler
 
-# import system module
 import sys
-# import some PyQt5 modules
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtWidgets import QMessageBox
-from PyQt5.QtCore import pyqtSignal #Bu veriyi sayfadan sayfaya aktarmak için lazım olacak.
+from PyQt5.QtCore import pyqtSignal 
 from PyQt5.QtGui import QImage
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import QTimer
@@ -25,7 +35,6 @@ from email.message import EmailMessage
 import smtplib
 import time
 import beepy as beep
-# import Opencv module
 import cv2
 from ui_main_window import *
 import threading
@@ -37,10 +46,10 @@ import faulthandler
 
 
 class Ui(QWidget):
-    # class constructor
+    
     def __init__(self):
         
-        # call QWidget constructor
+        
         super(Ui, self).__init__()
         uic.loadUi('ui_main_window.ui', self)  #Sayfamızı yüklüyoruz.
         self.cap2 = cv2.VideoCapture(0)
@@ -1544,3 +1553,17 @@ if __name__ == '__main__':
     window = Ui()
     window.show()
     app.exec_()
+    
+    
+    
+###########################################################################
+########################## DEVELOPED BY CAFTELLE ##########################
+########################## DEVELOPED BY CAFTELLE ##########################
+########################## DEVELOPED BY CAFTELLE ##########################
+###########################################################################
+################################# I E T ###################################
+######################## V E R S I O N  2 . 0 . 0 #########################
+###########################################################################
+###########################################################################
+################## Caftelle Created by Furkan ARINCI ######################
+###########################################################################
