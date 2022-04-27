@@ -48,12 +48,12 @@ mailsound = Path().cwd() / "mailgonder.mp3"
 alarmsound = Path().cwd() / "alarm.mp3"
 
 #WindowsTesseract
-
+"""
 try:
     pytesseract.pytesseract.tesseract_cmd = Path().cwd() / "tesseract.exe"
 except:
     pass
-
+"""
 
 class Ui(QWidget):
 
