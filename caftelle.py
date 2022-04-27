@@ -42,18 +42,13 @@ from threading import Thread
 import atexit
 import faulthandler
 
-#Sesler
-qrsound = Path().cwd() / "qr.mp3"
-mailsound = Path().cwd() / "mailgonder.mp3"
-alarmsound = Path().cwd() / "alarm.mp3"
-
 #WindowsTesseract
-"""
+"""""
 try:
     pytesseract.pytesseract.tesseract_cmd = Path().cwd() / "tesseract.exe"
 except:
     pass
-"""
+"""""
 
 class Ui(QWidget):
 
@@ -110,11 +105,13 @@ class Ui(QWidget):
             else:
                 self.excelAc = False
                 self.mfg_print_and_show("Dosya silinmedi!")
+                alarmsound = Path().cwd() / "alarm.mp3"
                 playsound(alarmsound)
         except Exception as e:
             self.excelAc = False
             print(e)
             self.mfg_print_and_show('Dosya zaten silinmiş.')
+            alarmsound = Path().cwd() / "alarm.mp3"
             playsound(alarmsound)
             return False
 
@@ -304,6 +301,7 @@ class Ui(QWidget):
                 qrtemiz2 = obj.data.decode('utf-8')
                 cv.putText(self.image, str(qrtemiz2), (200, 200), font, 1,
                            (0, 255, 160), 2)
+                qrsound = Path().cwd() / "qr.mp3"
                 playsound(qrsound)
 
             self.mfg_print_and_show(
@@ -1515,17 +1513,20 @@ class Ui(QWidget):
                 print('Gönderilen Mail Adresi: ' + recipient + '\nMail başarı ile gönderildi.')
                 self.mfg_print_and_show('Gönderilen Mail Adresi: ' + recipient + '\nMail başarı ile gönderildi.')
                 self.dosyasilme()
+                mailsound = Path().cwd() / "mailgonder.mp3"
                 playsound(mailsound)
 
             else:
                 print('Dosya bulunamadığı için mail gönderilemedi.')
                 self.mfg_print_and_show('Dosya bulunamadığı için mail gönderilemedi.')
+                alarmsound = Path().cwd() / "alarm.mp3"
                 playsound(alarmsound)
 
         except Exception as e:
             print(e)
             print('Mail Adresini veya Kullanıcı Adı yanlış olduğu için mail gönderilemedi.')
             self.mfg_print_and_show('Mail Adresini veya Kullanıcı Adı yanlış olduğu için mail gönderilemedi.')
+            alarmsound = Path().cwd() / "alarm.mp3"
             playsound(alarmsound)
 
         self.uiMailGonder.setEnabled(True)
@@ -1584,6 +1585,8 @@ class askingPage(QtWidgets.QDialog):  # ikinci sayfanin sinifi burada bulunmakta
         data = "delete"
         self.mySignal.emit(data)  # Şimdi verimizle beraber sinyal gönderiyoruz alıcıya.
         self.deleteButton.setText("Silindi")
+        textsound = Path().cwd() / "text.mp3"
+        playsound(textsound)
         self.close()
 
 
