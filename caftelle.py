@@ -11,13 +11,13 @@
 ###########################################################################
 
 # Kütüphaneler
-
+from pathlib import Path
 from playsound import playsound
 import sys
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtWidgets import QMessageBox
-from PyQt5.QtCore import pyqtSignal 
+from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtGui import QImage
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import QTimer
@@ -42,30 +42,44 @@ from threading import Thread
 import atexit
 import faulthandler
 
+#Sesler
+qrsound = Path().cwd() / "qr.mp3"
+mailsound = Path().cwd() / "mailgonder.mp3"
+alarmsound = Path().cwd() / "alarm.mp3"
+
+#WindowsTesseract
+
+try:
+    pytesseract.pytesseract.tesseract_cmd = Path().cwd() / "tesseract.exe"
+except:
+    pass
+
+
 class Ui(QWidget):
-    
+
     def __init__(self):
-        
-        
+
         super(Ui, self).__init__()
-        uic.loadUi('ui_main_window.ui', self)  #Sayfamızı yüklüyoruz.
+        uic.loadUi('ui_main_window.ui', self)  # Sayfamızı yüklüyoruz.
         self.cap2 = cv2.VideoCapture(0)
         # read self.image in BGR format
         self.ret2, self.image2 = self.cap2.read()
         self.imgForSearch = self.image2
         self.cap2.release()
 
-        #Bunlar sıralamada problem olmasın diye burada kayıtlı, tek tek yükseltme olayı bulunmakta.
+        # Bunlar sıralamada problem olmasın diye burada kayıtlı, tek tek yükseltme olayı bulunmakta.
         self.tesisline = 2
         self.iptalline = 2
-        self.excelAc = False #Silme onaylanırsa yeni dosya açabilmek için onay
+        self.excelAc = False
+        # Silme onaylanırsa yeni dosya açabilmek için onay
 
-        self.dialog = askingPage() #İkinci sayfamızın sınıfı, bunu çağırabilmek için kullanacağız.
-        self.dialog.mySignal.connect(self.changeData) #İkinci sayfamızdaki veri değiştiğinde ve butona tıklanıldığında burası çalışacak.
+        self.dialog = askingPage()  # İkinci sayfamızın sınıfı, bunu çağırabilmek için kullanacağız.
+        self.dialog.mySignal.connect(
+            self.changeData)  # İkinci sayfamızdaki veri değiştiğinde ve butona tıklanıldığında burası çalışacak.
         self.scthread = Thread(target=self.showCamera)
         self.scthread.start()
-        
-        #dosya açma
+
+        # dosya açma
         try:
             self.planWorkbook = openpyxl.load_workbook('Taranan_Is_Emirleri.xlsx')
             # Excel Stün ve Sekme Oluşturma
@@ -75,14 +89,14 @@ class Ui(QWidget):
             self.mfg_print_and_show("Taranan_Is_Emirleri.xlsx dosyası oluşturulacaktır.")
             self.excelAc = True
 
-        #Burada benim butonlarımın bağlantıları bulunmakta
+        # Burada benim butonlarımın bağlantıları bulunmakta
         self.taramaYap.clicked.connect(self.taramaYapF)
         self.uiMailGonder.clicked.connect(self.uiMailGonderFonksiyon)
         self.uiMailGonder.setEnabled(False)
         self.myShow = True
         app.aboutToQuit.connect(self.closeThreads)
-    
-    def changeData(self, data): #Veri değiştiğinde label adlı yazı bölgemize
+
+    def changeData(self, data):  # Veri değiştiğinde label adlı yazı bölgemize
         try:
             self.mfg_print_and_show('Dosyanın silinmesi hakkında...')
             self.dialog.show()
@@ -91,19 +105,21 @@ class Ui(QWidget):
                 self.mfg_print_and_show("Dosya silindi!")
                 tarananisemri2 = 'Taranan_Is_Emirleri.xlsx'
                 os.remove(tarananisemri2)
-                playsound("text.wav")
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
             else:
                 self.excelAc = False
                 self.mfg_print_and_show("Dosya silinmedi!")
-                playsound("alarm.wav")
+                playsound(alarmsound)
         except Exception as e:
             self.excelAc = False
             print(e)
             self.mfg_print_and_show('Dosya zaten silinmiş.')
-            playsound("alarm.wav")
+            playsound(alarmsound)
             return False
 
     def taramaYapF(self):
+
         self.mfg_print_and_show('Belge taramayı başlattınız!')
         self.uiMailGonder.setEnabled(False)
         self.mfg_print_and_show('-')
@@ -113,21 +129,20 @@ class Ui(QWidget):
         self.isTur.setText('-')
         self.awlthread = Thread(target=self.AllWithLove)
         self.awlthread.start()
-        #Asıl fonksiyona yönlendirdim.
-    
+        # Asıl fonksiyona yönlendirdim.
+
     def closeThreads(self):
         self.setShow(False)
         print("fdgd")
 
-    #Kod karmaşasından kurtulmak için bunu yaptım.
+    # Kod karmaşasından kurtulmak için bunu yaptım.
     def mfg_print_and_show(self, data):
         self.bilgi.setText(data)
         print(f'{self.tesisline}-{self.iptalline}')
         print(data)
 
     def AllWithLove(self):
-        
-        
+
         print('')
         print(
             '################################################### DEVELOPED BY CAFTELLE ###################################################')
@@ -164,7 +179,8 @@ class Ui(QWidget):
                 with open('TutanakForm.xlsm', 'wb') as output:
                     output.write(resp.content)
                     self.mfg_print_and_show('İndirme Tamamlandı.')
-                    playsound("text.wav")
+                    textsound = Path().cwd() / "text.mp3"
+                    playsound(textsound)
 
                 break
 
@@ -199,8 +215,8 @@ class Ui(QWidget):
                 self.mfg_print_and_show("Taranan_Is_Emirleri.xlsx dosyası oluşturulacaktır.")
         else:
             try:
-                #kaçıncı satırın boş olduğunu öğreneceğim
-                #ilk başta dosyamı açıyorum
+                # kaçıncı satırın boş olduğunu öğreneceğim
+                # ilk başta dosyamı açıyorum
                 self.planWorkbook = openpyxl.load_workbook('Taranan_Is_Emirleri.xlsx')
                 # Excel Stün ve Sekme Oluşturma
                 self.planSheettesis = self.planWorkbook["TESIS"]
@@ -221,20 +237,20 @@ class Ui(QWidget):
                 self.planSheetiptal['E1'] = 'İş Emri Tipi'
                 self.planSheetiptal['F1'] = 'Tarih'
 
-                i,j=2,2
+                i, j = 2, 2
 
-                #sonra içinde geziyorum boş yer bulana kadar
+                # sonra içinde geziyorum boş yer bulana kadar
                 while self.getShow() and self.planSheettesis[f"A{i}"].value != None:
-                    #time.sleep(1)
+                    # time.sleep(1)
                     print(self.planSheettesis[f"A{i}"].value)
-                    i+=1
+                    i += 1
 
                 while self.getShow() and self.planSheetiptal[f"A{j}"].value != None:
-                    #time.sleep(1)
+                    # time.sleep(1)
                     print(self.planSheetiptal[f"A{j}"].value)
-                    j+=1
-                
-                #boş yeri bulduğumda değer olarak yazdırıyorum.
+                    j += 1
+
+                # boş yeri bulduğumda değer olarak yazdırıyorum.
                 self.tesisline = i
                 print(self.tesisline)
                 self.iptalline = j
@@ -247,7 +263,7 @@ class Ui(QWidget):
         textstart = False
         savestart = True
         qrstart = True
-        gerekli =False
+        gerekli = False
         musterinofinal = '(     )'
         hizmetnofinal = '(     )'
         isemrinofinal = '1'
@@ -259,11 +275,11 @@ class Ui(QWidget):
         qrhizmetno = 0
         isemrinoindex = 0
         isemrituruindex = 0
-        #self.cap1 = cv2.VideoCapture(0)
+        # self.cap1 = cv2.VideoCapture(0)
         self.image = self.getImage()
         # convert self.image to RGB format
         self.image = cv2.cvtColor(self.image, cv2.COLOR_BGR2RGB)
-        
+
         while self.getShow() and qrstart:
             # Değerleri Sıfırlama
             musterinoindex = 0
@@ -287,13 +303,13 @@ class Ui(QWidget):
             for obj in decodedObjects:
                 qrtemiz2 = obj.data.decode('utf-8')
                 cv.putText(self.image, str(qrtemiz2), (200, 200), font, 1,
-                        (0, 255, 160), 2)
-                playsound("qr.wav")
+                           (0, 255, 160), 2)
+                playsound(qrsound)
 
             self.mfg_print_and_show(
                 'Müşteri No, Hizmet No, İş Emri No Taranıyor...\nİş Emri Türü bir sonraki aşamada taranacak.')
-            #cv.imshow("QR Tarama", self.image)
-            #cv.waitKey(1)
+            # cv.imshow("QR Tarama", self.image)
+            # cv.waitKey(1)
 
             for qrcodee in decode(self.image):
 
@@ -322,8 +338,8 @@ class Ui(QWidget):
                     isemriturufinal = isemrituru1.replace("IT", "")
 
                     replace_chars = [('ı', 'i'), ('İ', 'I'), ('ü', 'u'), ('Ü', 'U'), ('ö', 'o'), ('Ö', 'O'), ('ç', 'c'),
-                                        ('Ç', 'C'),
-                                        ('ş', 's'), ('Ş', 'S'), ('ğ', 'g'), ('Ğ', 'G')]
+                                     ('Ç', 'C'),
+                                     ('ş', 's'), ('Ş', 'S'), ('ğ', 'g'), ('Ğ', 'G')]
 
                     for search, replace in replace_chars:
                         isemriturufinal = isemriturufinal.replace(search, replace)
@@ -357,7 +373,7 @@ class Ui(QWidget):
             gerekli = True
 
         # YAZI TARAMA
-        #self.cap1 = cv2.VideoCapture(0)
+        # self.cap1 = cv2.VideoCapture(0)
         self.image = self.getImage()
         # convert self.image to RGB format
         self.image = cv2.cvtColor(self.image, cv2.COLOR_BGR2RGB)
@@ -383,23 +399,22 @@ class Ui(QWidget):
 
             for b in boxes.splitlines():
                 b = b.split(' ')
-                self.image = cv.rectangle(self.image, (int(b[1]), self.height - int(b[2])), (int(b[3]), self.height - int(b[4])), (0, 255, 160), 1)
+                self.image = cv.rectangle(self.image, (int(b[1]), self.height - int(b[2])),
+                                          (int(b[3]), self.height - int(b[4])), (0, 255, 160), 1)
 
             replace_chars = [('ı', 'i'), ('İ', 'I'), ('ü', 'u'), ('Ü', 'U'), ('ö', 'o'), ('Ö', 'O'), ('ç', 'c'),
-                            ('Ç', 'C'),
-                            ('ş', 's'), ('Ş', 'S'), ('ğ', 'g'), ('Ğ', 'G')]
+                             ('Ç', 'C'),
+                             ('ş', 's'), ('Ş', 'S'), ('ğ', 'g'), ('Ğ', 'G')]
             for search, replace in replace_chars:
                 text2 = text2.replace(search, replace)
                 text2 = text2.upper()
                 text2 = text2.strip()
-
                 break
 
             # Okunan Yazıları Tanıma ve Türüne Göre Ayıklama
             for self.image in text2:
 
                 if 'OKUNAMIYOR' in text2:
-
                     iptalturu = 'OKUNAMADI'
                     textstart = False
                     print('')
@@ -412,6 +427,7 @@ class Ui(QWidget):
                     self.hizmetNum.setText(hizmetnofinal)
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
+
                     break
 
                 if 'NUMARA TASIMA' in text2:
@@ -470,7 +486,7 @@ class Ui(QWidget):
                     self.isTur.setText(iptalturu)
                     break
 
-                if  'ABONE ISTEGI ILE IPTAL' in text2:
+                if 'ABONE ISTEGI ILE IPTAL' in text2:
                     iptalturu = 'ABONELİK İPTAL'
                     textstart = False
                     print('')
@@ -484,7 +500,7 @@ class Ui(QWidget):
                     self.isTur.setText(iptalturu)
                     break
 
-                if  'ABONELIK IPTAL' in  text2:
+                if 'ABONELIK IPTAL' in text2:
                     iptalturu = 'ABONELİK İPTAL'
                     textstart = False
                     print('')
@@ -498,7 +514,7 @@ class Ui(QWidget):
                     self.isTur.setText(iptalturu)
                     break
 
-                if  'TARIFE DEGISIMI' in text2:
+                if 'TARIFE DEGISIMI' in text2:
                     iptalturu = 'TARİFE DEĞİŞİMİ'
                     textstart = False
                     print('')
@@ -512,7 +528,7 @@ class Ui(QWidget):
                     self.isTur.setText(iptalturu)
                     break
 
-                if  'KAMPANYAYA GECIS' in text2:
+                if 'KAMPANYAYA GECIS' in text2:
                     iptalturu = 'TARİFE DEĞİŞİMİ'
                     textstart = False
                     print('')
@@ -526,7 +542,7 @@ class Ui(QWidget):
                     self.isTur.setText(iptalturu)
                     break
 
-                if 'KIRALAMA IPTAL' and 'CIHAZ KIRALAMA IPTAL'in text2:
+                if 'KIRALAMA IPTAL' and 'CIHAZ KIRALAMA IPTAL' in text2:
                     iptalturu = 'CİHAZ KİRALAMA İPTAL'
                     textstart = False
                     print('')
@@ -553,7 +569,7 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
+
                 if 'TAAHHUTLU ABONELIK DEVIR ALMA' and 'ABONELIK DEVIR ALMA' in text2:
                     iptalturu = 'TAAHHÜTLÜ ABONELİK DEVİR ALMA'
                     textstart = False
@@ -567,7 +583,7 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
+
                 if 'TAAHHUTLU ABONELIK DEVIR' and 'ABONELIK DEVIR' in text2:
                     iptalturu = 'TAAHHÜTLÜ ABONELİK DEVİR'
                     textstart = False
@@ -581,8 +597,8 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
-                if  'YENI ABONELIK' in text2:
+
+                if 'YENI ABONELIK' in text2:
                     iptalturu = 'TAAHHÜTLÜ YENİ ABONELİK'
                     textstart = False
                     print('')
@@ -595,8 +611,8 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
-                if 'NAKIL GELEN'in text2:
+
+                if 'NAKIL GELEN' in text2:
                     iptalturu = 'TAAHHÜTLÜ NAKİL GELEN'
                     textstart = False
                     print('')
@@ -609,7 +625,7 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
+
                 if 'ASKIYA ALMA' in text2:
                     iptalturu = 'HİZMETİ ASKIYA ALMA'
                     textstart = False
@@ -623,7 +639,7 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
+
                 if 'HIZMETI ASKIYA ALMA' in text2:
                     iptalturu = 'HİZMETİ ASKIYA ALMA'
                     textstart = False
@@ -637,7 +653,7 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
+
                 if 'CIHAZ IADE' and 'CIHAZ IADE FORMU' and 'IADE FORMU' in text2:
                     iptalturu = 'CİHAZ İADE FORMU'
                     textstart = False
@@ -651,7 +667,7 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
+
                 if 'KABLONET IPTAL BAŞVURU FORMU' and 'KABLOTV IPTAL BASVURU FORMU' and 'IPTAL BASVURU' in text2:
                     iptalturu = 'KABLONET İPTAL FORMU'
                     textstart = False
@@ -666,10 +682,11 @@ class Ui(QWidget):
                     self.isTur.setText(iptalturu)
                     break
 
+
         while self.getShow() and gerekli:
             replace_chars = [('ı', 'i'), ('İ', 'I'), ('ü', 'u'), ('Ü', 'U'), ('ö', 'o'), ('Ö', 'O'), ('ç', 'c'),
-                            ('Ç', 'C'),
-                            ('ş', 's'), ('Ş', 'S'), ('ğ', 'g'), ('Ğ', 'G')]
+                             ('Ç', 'C'),
+                             ('ş', 's'), ('Ş', 'S'), ('ğ', 'g'), ('Ğ', 'G')]
             for search, replace in replace_chars:
                 text2 = text2.replace(search, replace)
                 text2 = text2
@@ -681,7 +698,6 @@ class Ui(QWidget):
             for self.image in text2:
 
                 if 'OKUNAMIYOR' in text2:
-
                     iptalturu = 'OKUNAMADI'
                     gerekli = False
                     print('')
@@ -694,10 +710,8 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
 
                 if 'NUMARATASIMA' in text2:
-
                     iptalturu = 'NUMARA TAŞIMALI YENİ ABONELİK'
                     gerekli = False
                     print('')
@@ -710,7 +724,6 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
 
                 if 'KABLOSESIPTAL' in text2:
                     iptalturu = 'KABLOSES İPTAL'
@@ -725,9 +738,8 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
 
-                if  'VERASETENIPTAL' in text2:
+                if 'VERASETENIPTAL' in text2:
                     iptalturu = 'VERASETEN İPTAL'
                     gerekli = False
                     print('')
@@ -740,7 +752,7 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
+
                 if 'ABONELIKIPTAL' in text2:
                     iptalturu = 'ABONELİK İPTAL'
                     gerekli = False
@@ -754,8 +766,8 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
-                if  'TARIFEDEGISIMI' in text2:
+
+                if 'TARIFEDEGISIMI' in text2:
                     iptalturu = 'TARİFE DEĞİŞİMİ'
                     gerekli = False
                     print('')
@@ -768,7 +780,7 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
+
                 if 'CIHAZKIRALAMAIPTAL' in text2:
                     iptalturu = 'CİHAZ KİRALAMA İPTAL'
                     gerekli = False
@@ -782,7 +794,7 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
+
                 if 'CIHAZKIRALAMASIPARIS' in text2:
                     iptalturu = 'CİHAZ KİRALAMA SİPARİŞ'
                     gerekli = False
@@ -796,8 +808,8 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
-                if  'TAAHHUTLUABONELIKDEVIRALMA' in text2:
+
+                if 'TAAHHUTLUABONELIKDEVIRALMA' in text2:
                     iptalturu = 'TAAHHÜTLÜ ABONELİK DEVİR ALMA'
                     gerekli = False
                     print('')
@@ -810,7 +822,7 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
+
                 if 'TAAHHUTLUABONELIKDEVIR' in text2:
                     iptalturu = 'TAAHHÜTLÜ ABONELİK DEVİR'
                     gerekli = False
@@ -824,7 +836,7 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
+
                 if 'TAAHHUTLUYENIABONELIK' in text2:
                     iptalturu = 'TAAHHÜTLÜ YENİ ABONELİK'
                     gerekli = False
@@ -838,8 +850,8 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
-                if  'TAAHHUTLU ABONELIK NAKIL GELEN' and 'TAHHUTLUNAKILGELEN' in text2:
+
+                if 'TAAHHUTLU ABONELIK NAKIL GELEN' and 'TAHHUTLUNAKILGELEN' in text2:
                     iptalturu = 'TAAHHÜTLÜ NAKİL GELEN'
                     gerekli = False
                     print('')
@@ -852,8 +864,8 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
-                if  'HIZMETIASKIYAALMA' in text2:
+
+                if 'HIZMETIASKIYAALMA' in text2:
                     iptalturu = 'HİZMETİ ASKIYA ALMA'
                     gerekli = False
                     print('')
@@ -866,7 +878,7 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
+
                 if 'CIHAZIADEFORMU' in text2:
                     iptalturu = 'CİHAZ İADE FORMU'
                     gerekli = False
@@ -880,7 +892,7 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
+
                 if 'KABLONETIPTALBASVURUFORMU' in text2:
                     iptalturu = 'KABLONET İPTAL FORMU'
                     gerekli = False
@@ -894,7 +906,6 @@ class Ui(QWidget):
                     self.isNum.setText(isemrinofinal)
                     self.isTur.setText(iptalturu)
                     break
-                    
 
         # Kamera'dan Okunan Yazının ayrıştırılıp Uygun Yere Atanması Kontrolü
         if iptalturu != '(     )':
@@ -934,12 +945,13 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı. Manuel Düzeltme Gerekiyor.')
-                playsound("text.wav")
+
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
-
-            if  'NUMARA TAŞIMALI YENİ ABONELİK' in iptalturu:
+            if 'NUMARA TAŞIMALI YENİ ABONELİK' in iptalturu:
                 tarih1 = datetime.datetime.now()
                 yil1 = tarih1.year
                 ay1 = tarih1.month
@@ -967,11 +979,13 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                playsound("text.wav")
+
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
-            if  'KABLOSES İPTAL' in iptalturu:
+            if 'KABLOSES İPTAL' in iptalturu:
                 tarih1 = datetime.datetime.now()
                 yil1 = tarih1.year
                 ay1 = tarih1.month
@@ -999,8 +1013,10 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                playsound("text.wav")
+
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
             if 'TARİFE DEĞİŞİMİ' in iptalturu:
@@ -1031,8 +1047,9 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                playsound("text.wav")
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
             if 'TAAHHÜTLÜ YENİ ABONELİK' in iptalturu:
@@ -1063,8 +1080,10 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                playsound("text.wav")
+
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
             if 'TAAHHÜTLÜ ABONELİK DEVİR' in iptalturu:
@@ -1095,8 +1114,11 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                playsound("text.wav")
+
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
+
                 break
 
             if 'HİZMETİ ASKIYA ALMA' in iptalturu:
@@ -1127,8 +1149,10 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                playsound("text.wav")
+
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
             if 'TAAHHÜTLÜ ABONELİK DEVİR ALMA' in iptalturu:
@@ -1159,8 +1183,10 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                playsound("text.wav")
+
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
 
                 break
 
@@ -1192,8 +1218,10 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                playsound("text.wav")
+
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
             if 'CİHAZ KİRALAMA İPTAL' in iptalturu:
                 tarih1 = datetime.datetime.now()
@@ -1223,8 +1251,10 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                playsound("text.wav")
+
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
             if 'TAAHHÜTLÜ NAKİL GELEN' in iptalturu:
@@ -1255,8 +1285,10 @@ class Ui(QWidget):
                 self.tesisline = self.tesisline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                playsound("text.wav")
+
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
             if 'ABONELİK İPTAL' in iptalturu:
@@ -1287,8 +1319,10 @@ class Ui(QWidget):
                 self.iptalline = self.iptalline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                playsound("text.wav")
+
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
             if 'CİHAZ İADE FORMU' in iptalturu:
@@ -1319,8 +1353,10 @@ class Ui(QWidget):
                 self.iptalline = self.iptalline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                playsound("text.wav")
+
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
             if 'VERASETEN İPTAL' in iptalturu:
@@ -1351,8 +1387,10 @@ class Ui(QWidget):
                 self.iptalline = self.iptalline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                playsound("text.wav")
+
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
             if 'KABLONET İPTAL FORMU' in iptalturu:
@@ -1383,15 +1421,18 @@ class Ui(QWidget):
                 self.iptalline = self.iptalline + 1
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
-                playsound("text.wav")
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
+
                 break
 
         print('')
         print(
             '################################################### DEVELOPED BY CAFTELLE ###################################################')
         print('')
-        self.mfg_print_and_show("Belge tarama bittiyse mail ile göndermek için\nGönder tuşuna basınız. Devam etmek istiyorsanız 'Tarama Yap'\ntuşuna basınız.")
+        self.mfg_print_and_show(
+            "Belge tarama bittiyse mail ile göndermek için\nGönder tuşuna basınız. Devam etmek istiyorsanız 'Tarama Yap'\ntuşuna basınız.")
         self.uiMailGonder.setEnabled(True)
         self.excelAc = False
         self.taramaYap.setEnabled(True)
@@ -1399,7 +1440,7 @@ class Ui(QWidget):
     def dosyasilme(self):
         self.mfg_print_and_show('Dosyanın silinmesi hakkında...')
         self.dialog.show()
-    
+
     def uiMailGonderFonksiyon(self):
         self.uiMailGonder.setEnabled(False)
         self.taramaYap.setEnabled(False)
@@ -1408,7 +1449,7 @@ class Ui(QWidget):
             mailOrName = self.mail.text()
             mailEk = '@turksat.com.tr'
             mail = ''
-            
+
             if '@' in mailOrName:
                 mail = mailOrName
             else:
@@ -1459,41 +1500,41 @@ class Ui(QWidget):
 
                 with open(tutanakdosyasi2, 'rb') as file:
                     message.add_attachment(file.read(), maintype=mime_type, subtype=mime_subtype,
-                                        filename=tttoplami + '_Tarihli_Is_Emirleri_Tutanagı.xlsm')
+                                           filename=tttoplami + '_Tarihli_Is_Emirleri_Tutanagı.xlsm')
                     print('Taranan Tutanak Formunu maile ekledim... ')
                     self.mfg_print_and_show('Taranan Tutanak Formunu maile ekledim... ')
 
                 with open(tarananisemri, 'rb') as file:
                     self.mfg_print_and_show('Taranan Is Emirleri Formunu maile ekledim... ')
                     message.add_attachment(file.read(), maintype=mime_type, subtype=mime_subtype,
-                                            filename='Taranan_Is_Emirleri.xlsx')
+                                           filename='Taranan_Is_Emirleri.xlsx')
 
                 mail_server.send_message(message)
                 mail_server.quit()
 
-                print('Gönderilen Mail Adresi: '+ recipient +'\nMail başarı ile gönderildi.')
-                self.mfg_print_and_show('Gönderilen Mail Adresi: '+ recipient +'\nMail başarı ile gönderildi.')
+                print('Gönderilen Mail Adresi: ' + recipient + '\nMail başarı ile gönderildi.')
+                self.mfg_print_and_show('Gönderilen Mail Adresi: ' + recipient + '\nMail başarı ile gönderildi.')
                 self.dosyasilme()
-                playsound("mailgonder.wav")
+                playsound(mailsound)
 
             else:
                 print('Dosya bulunamadığı için mail gönderilemedi.')
                 self.mfg_print_and_show('Dosya bulunamadığı için mail gönderilemedi.')
-                playsound("alarm.wav")
+                playsound(alarmsound)
 
-        except Exception as e: 
+        except Exception as e:
             print(e)
             print('Mail Adresini veya Kullanıcı Adı yanlış olduğu için mail gönderilemedi.')
             self.mfg_print_and_show('Mail Adresini veya Kullanıcı Adı yanlış olduğu için mail gönderilemedi.')
-            playsound("alarm.wav")
-                
+            playsound(alarmsound)
+
         self.uiMailGonder.setEnabled(True)
         self.taramaYap.setEnabled(True)
-    
+
     # getter method
     def getImage(self):
         return self.imgForSearch
-      
+
     # setter method
     def setImage(self, x):
         self.imgForSearch = x
@@ -1501,12 +1542,12 @@ class Ui(QWidget):
     # getter method
     def getShow(self):
         return self.myShow
-      
+
     # setter method
     def setShow(self, x):
         self.myShow = x
 
-    #Burada kamera ekrana yansıtma yapacak
+    # Burada kamera ekrana yansıtma yapacak
     def showCamera(self):
         self.cap2 = cv2.VideoCapture(0)
         # read self.image in BGR format
@@ -1528,32 +1569,34 @@ class Ui(QWidget):
                 # show self.image in img_label
                 self.image_label.setPixmap(QPixmap.fromImage(qImg2))
 
-class askingPage(QtWidgets.QDialog): #ikinci sayfanin sinifi burada bulunmaktadir.
-    
+
+class askingPage(QtWidgets.QDialog):  # ikinci sayfanin sinifi burada bulunmaktadir.
+
     mySignal = pyqtSignal(str)
-    
+
     def __init__(self):
         super(askingPage, self).__init__()
-        uic.loadUi('dosya_silme_onay.ui', self)  #İkinci sayfamızı buradan açıyoruz.
-        
-        self.deleteButton.clicked.connect(self.deleteButtonFunc) #Butona tıkladığımızda
-    
+        uic.loadUi('dosya_silme_onay.ui', self)  # İkinci sayfamızı buradan açıyoruz.
+
+        self.deleteButton.clicked.connect(self.deleteButtonFunc)  # Butona tıkladığımızda
+
     def deleteButtonFunc(self):
         data = "delete"
-        self.mySignal.emit(data) #Şimdi verimizle beraber sinyal gönderiyoruz alıcıya.
+        self.mySignal.emit(data)  # Şimdi verimizle beraber sinyal gönderiyoruz alıcıya.
         self.deleteButton.setText("Silindi")
         self.close()
 
+
 if __name__ == '__main__':
-    #Bu kısım ilk başta çalışmaktadır.
+    # Bu kısım ilk başta çalışmaktadır.
     faulthandler.enable()
     app = QtWidgets.QApplication(sys.argv)
     window = Ui()
     window.show()
     app.exec_()
-    
-    
-    
+
+
+###########################################################################
 ###########################################################################
 ########################## DEVELOPED BY CAFTELLE ##########################
 ########################## DEVELOPED BY CAFTELLE ##########################
