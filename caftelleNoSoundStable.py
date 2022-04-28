@@ -1463,7 +1463,7 @@ class Ui(QWidget):
                 print('Gönderilecek Dosya Bulundu. Mail göndermeye hazırlanıyorum.')
                 self.mfg_print_and_show('Gönderilecek Dosya Bulundu. Mail göndermeye hazırlanıyorum.')
                 mail_server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-                mail_server.login("developed.by.caftelle@gmail.com", 'yzgchfnfzbivbhei')
+                mail_server.login("*******@gmail.com", '*********')
                 message = EmailMessage()
                 sender = "developed.by.caftelle@gmail.com"
                 recipient = mail
