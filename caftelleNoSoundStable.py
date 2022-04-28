@@ -12,6 +12,7 @@
 
 # Kütüphaneler
 from pathlib import Path
+from playsound import playsound
 import sys
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QWidget
@@ -99,16 +100,19 @@ class Ui(QWidget):
                 self.mfg_print_and_show("Dosya silindi!")
                 tarananisemri2 = 'Taranan_Is_Emirleri.xlsx'
                 os.remove(tarananisemri2)
-                
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
             else:
                 self.excelAc = False
                 self.mfg_print_and_show("Dosya silinmedi!")
-                
+                alarmsound = Path().cwd() / "alarm.mp3"
+                playsound(alarmsound)
         except Exception as e:
             self.excelAc = False
             print(e)
             self.mfg_print_and_show('Dosya zaten silinmiş.')
-            
+            alarmsound = Path().cwd() / "alarm.mp3"
+            playsound(alarmsound)
             return False
 
     def taramaYapF(self):
@@ -172,7 +176,8 @@ class Ui(QWidget):
                 with open('TutanakForm.xlsm', 'wb') as output:
                     output.write(resp.content)
                     self.mfg_print_and_show('İndirme Tamamlandı.')
-                    
+                    textsound = Path().cwd() / "text.mp3"
+                    playsound(textsound)
 
                 break
 
@@ -296,7 +301,8 @@ class Ui(QWidget):
                 qrtemiz2 = obj.data.decode('utf-8')
                 cv.putText(self.image, str(qrtemiz2), (200, 200), font, 1,
                            (0, 255, 160), 2)
-                
+                qrsound = Path().cwd() / "qr.mp3"
+                playsound(qrsound)
 
             self.mfg_print_and_show(
                 'Müşteri No, Hizmet No, İş Emri No Taranıyor...\nİş Emri Türü bir sonraki aşamada taranacak.')
@@ -939,7 +945,8 @@ class Ui(QWidget):
                 self.mfg_print_and_show('Başarıyla Aktarıldı. Manuel Düzeltme Gerekiyor.')
 
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
-                
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
             if 'NUMARA TAŞIMALI YENİ ABONELİK' in iptalturu:
@@ -972,7 +979,8 @@ class Ui(QWidget):
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
 
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
-                
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
             if 'KABLOSES İPTAL' in iptalturu:
@@ -1005,7 +1013,8 @@ class Ui(QWidget):
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
 
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
-                
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
             if 'TARİFE DEĞİŞİMİ' in iptalturu:
@@ -1037,7 +1046,8 @@ class Ui(QWidget):
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
-               
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
             if 'TAAHHÜTLÜ YENİ ABONELİK' in iptalturu:
@@ -1070,7 +1080,8 @@ class Ui(QWidget):
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
 
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
-                
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
             if 'TAAHHÜTLÜ ABONELİK DEVİR' in iptalturu:
@@ -1103,7 +1114,8 @@ class Ui(QWidget):
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
 
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
-                
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
 
                 break
 
@@ -1137,7 +1149,8 @@ class Ui(QWidget):
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
 
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
-                
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
             if 'TAAHHÜTLÜ ABONELİK DEVİR ALMA' in iptalturu:
@@ -1170,7 +1183,8 @@ class Ui(QWidget):
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
 
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
-               
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
 
                 break
 
@@ -1204,7 +1218,8 @@ class Ui(QWidget):
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
 
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
-                
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
             if 'CİHAZ KİRALAMA İPTAL' in iptalturu:
                 tarih1 = datetime.datetime.now()
@@ -1236,7 +1251,8 @@ class Ui(QWidget):
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
 
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
-                
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
             if 'TAAHHÜTLÜ NAKİL GELEN' in iptalturu:
@@ -1269,7 +1285,8 @@ class Ui(QWidget):
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
 
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
-               
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
             if 'ABONELİK İPTAL' in iptalturu:
@@ -1302,7 +1319,8 @@ class Ui(QWidget):
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
 
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
-                
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
             if 'CİHAZ İADE FORMU' in iptalturu:
@@ -1335,7 +1353,8 @@ class Ui(QWidget):
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
 
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
-                
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
             if 'VERASETEN İPTAL' in iptalturu:
@@ -1368,7 +1387,8 @@ class Ui(QWidget):
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
 
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
-               
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
                 break
 
             if 'KABLONET İPTAL FORMU' in iptalturu:
@@ -1400,7 +1420,8 @@ class Ui(QWidget):
                 savestart = False
                 self.mfg_print_and_show('Başarıyla Aktarıldı.')
                 self.planWorkbook.save('Taranan_Is_Emirleri.xlsx')
-                
+                textsound = Path().cwd() / "text.mp3"
+                playsound(textsound)
 
                 break
 
@@ -1463,9 +1484,9 @@ class Ui(QWidget):
                 print('Gönderilecek Dosya Bulundu. Mail göndermeye hazırlanıyorum.')
                 self.mfg_print_and_show('Gönderilecek Dosya Bulundu. Mail göndermeye hazırlanıyorum.')
                 mail_server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-                mail_server.login("*******@gmail.com", '*********')
+                mail_server.login("developed.caftelle@gmail.com", '*********')
                 message = EmailMessage()
-                sender = "developed.by.caftelle@gmail.com"
+                sender = "developed.caftelle@gmail.com"
                 recipient = mail
                 message['From'] = 'Caftelle Software'
                 message['To'] = recipient
@@ -1492,18 +1513,21 @@ class Ui(QWidget):
                 print('Gönderilen Mail Adresi: ' + recipient + '\nMail başarı ile gönderildi.')
                 self.mfg_print_and_show('Gönderilen Mail Adresi: ' + recipient + '\nMail başarı ile gönderildi.')
                 self.dosyasilme()
-                
+                mailsound = Path().cwd() / "mailgonder.mp3"
+                playsound(mailsound)
 
             else:
                 print('Dosya bulunamadığı için mail gönderilemedi.')
                 self.mfg_print_and_show('Dosya bulunamadığı için mail gönderilemedi.')
-                
+                alarmsound = Path().cwd() / "alarm.mp3"
+                playsound(alarmsound)
 
         except Exception as e:
             print(e)
             print('Mail Adresini veya Kullanıcı Adı yanlış olduğu için mail gönderilemedi.')
             self.mfg_print_and_show('Mail Adresini veya Kullanıcı Adı yanlış olduğu için mail gönderilemedi.')
-            
+            alarmsound = Path().cwd() / "alarm.mp3"
+            playsound(alarmsound)
 
         self.uiMailGonder.setEnabled(True)
         self.taramaYap.setEnabled(True)
@@ -1561,7 +1585,8 @@ class askingPage(QtWidgets.QDialog):  # ikinci sayfanin sinifi burada bulunmakta
         data = "delete"
         self.mySignal.emit(data)  # Şimdi verimizle beraber sinyal gönderiyoruz alıcıya.
         self.deleteButton.setText("Silindi")
-        
+        textsound = Path().cwd() / "text.mp3"
+        playsound(textsound)
         self.close()
 
 
