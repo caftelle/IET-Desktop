@@ -26,6 +26,8 @@ Version 1.0.4 Performance Updates Thu 14 Apr 05.06 P.M.
 Version 1.0.5 Text Reading Performance Update Sun 17 Apr 11.20 A.M.
 
 Version 2 for Desktop Sun 24 Apr 10.13 P.M. 
+For Windowsx64 https://drive.google.com/drive/folders/198Hy6b4OInihhMFhsnoXfkyyCZtCYB9w?usp=sharing
+
 
 ##########################################################
 
