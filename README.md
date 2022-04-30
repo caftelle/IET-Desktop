@@ -7,7 +7,7 @@ How to use?
 
 Hello, Run the application. First scan the QR Code. Then scan the desired inscription. (Be patient because the scanning process must read and query the article.) The software will continue processing according to the QR Code you have read. If you scan the QR Code other than TEAS|M99999|H99999|I99999 or TEAS|M99999|H99999|I99999|ITAAAA, you may receive an error. AAAA and 99999 are representative. After the successfully transferred article, the program will ask you if you will scan it again. Press ENTER to continue scanning. If you want to send the scanned files as Mail, you can start again the IETApp. Please don't forget to share your feedback with us. Finally, it is forbidden to make unauthorized changes to the codes of this software, make a copy of it and put it up for sale by changing the name, or use it for commercial purposes.
 
-Explain for The IETApp
+Explain for The IET (IS EMRI TARAMA)
 
 ##########################################################
 
