@@ -32,5 +32,4 @@ https://drive.google.com/file/d/1SKOiGjZ3gAk1S58ZKvh4eEPyDNEcKbrD/view?usp=shari
 
 ##########################################################
 
-| D e v e l o p e d by C a f t e l l e
-| Caftelle created by Furkan ARINCI | Copyright 2022
+| Developed by Caftelle | Caftelle created by Furkan ARINCI | Copyright 2022
