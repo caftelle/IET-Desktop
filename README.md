@@ -26,11 +26,14 @@ Version 1.0.4 Performance Updates Thu 14 Apr 05.06 P.M.
 Version 1.0.5 Text Reading Performance Update Sun 17 Apr 11.20 A.M.
 
 Version 2 for Desktop Sun 24 Apr 10.13 P.M. 
-For Windowsx64 
-https://drive.google.com/file/d/1SKOiGjZ3gAk1S58ZKvh4eEPyDNEcKbrD/view?usp=sharing
 
-Setup File Sat 30 Apr 08.31 P.M. For Windowsx64 
-https://drive.google.com/file/d/1bbDdTfT6Z7DYXkFQUpI6HplkNOd60G32/view?usp=sharing
+
+
+Setup File
+https://drive.google.com/file/d/1FXFkRqh8UTPZYwBXx9jEsXp3WBFF8EMw/view?usp=sharing
+
+IET Sign Certificate 
+https://drive.google.com/file/d/1zgIr50uSkG5j994C9bOL6QG-yNWowJI4/view?usp=sharing
 
 
 ##########################################################
