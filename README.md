@@ -29,7 +29,7 @@ Version 2 for Desktop Sun 24 Apr 10.13 P.M.
 For Windowsx64 
 https://drive.google.com/file/d/1SKOiGjZ3gAk1S58ZKvh4eEPyDNEcKbrD/view?usp=sharing
 
-Setup File Sat 30 Apr 08.31 P.M.
+Setup File Sat 30 Apr 08.31 P.M. For Windowsx64 
 https://drive.google.com/file/d/1bbDdTfT6Z7DYXkFQUpI6HplkNOd60G32/view?usp=sharing
 
 
