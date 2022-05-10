@@ -27,6 +27,18 @@ Version 1.0.5 Text Reading Performance Update Sun 17 Apr 11.20 A.M.
 
 Version 2 for Desktop Sun 24 Apr 10.13 P.M. 
 
+IET x64 Not Neccessary Administrator 
+https://drive.google.com/file/d/1seQ751aOnA2WUmtkBE95ar7noie4BUdw/view?usp=sharing
+
+IET x64 Neccessary Administrator 
+https://drive.google.com/file/d/1g7CqzbWeK_io8atkA_VkQdo1JlT-Jbgv/view?usp=sharing
+
+IET x86 Not Neccessary Administrator 
+https://drive.google.com/file/d/1k_0go3nW1ho5Zs2CMz2uOz3SpKvJR6ZA/view?usp=sharing
+
+IET x64 Neccessary Administrator 
+https://drive.google.com/file/d/1OFe7iM4vAbDc8QLBL8HXOrxYMyhurVyF/view?usp=sharing
+
 Files
 https://drive.google.com/file/d/1fR8ULnL9ofiLddxCse0YADnSH4aS7scf/view?usp=sharing
 
