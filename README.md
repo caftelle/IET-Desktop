@@ -39,6 +39,11 @@ https://drive.google.com/file/d/1qF8fH2LMksif0JJslp4e18JW6l6L_vtp/view?usp=shari
 IET x86 Neccessary Administrator 
 https://drive.google.com/file/d/1rWu3BSwtPd6Gm8KXPsJrx_8PIROSp8mH/view?usp=sharing
 
+IET Presentation PDF
+https://drive.google.com/file/d/1O1M_dVaaNTjFBPoHN97d5ALfA8T9KA1A/view?usp=sharing
+
+IET CODES
+https://drive.google.com/file/d/1YQljWOPnwqePZiHA49zQ3_1oQn8CX27D/view?usp=sharing
 
 Files
 https://drive.google.com/file/d/1fR8ULnL9ofiLddxCse0YADnSH4aS7scf/view?usp=sharing
