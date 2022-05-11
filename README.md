@@ -36,7 +36,7 @@ https://drive.google.com/file/d/1WrEzyNENoEj0alsGKsAmKODoDFJZd8uz/view?usp=shari
 IET x86 Not Neccessary Administrator 
 https://drive.google.com/file/d/1qF8fH2LMksif0JJslp4e18JW6l6L_vtp/view?usp=sharing
 
-IET x64 Neccessary Administrator 
+IET x86 Neccessary Administrator 
 https://drive.google.com/file/d/1rWu3BSwtPd6Gm8KXPsJrx_8PIROSp8mH/view?usp=sharing
 
 
