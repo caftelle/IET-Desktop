@@ -33,10 +33,10 @@ https://drive.google.com/file/d/1QtTGU5c84_jpQw2hTp_RiqJfw42Wn02y/view?usp=shari
 IET x64 Neccessary Administrator 
 https://drive.google.com/file/d/1WrEzyNENoEj0alsGKsAmKODoDFJZd8uz/view?usp=sharing
 
-IET x86 Not Neccessary Administrator 
+IET x86 Not Neccessary Administrator (STABLE)
 https://drive.google.com/file/d/1qF8fH2LMksif0JJslp4e18JW6l6L_vtp/view?usp=sharing
 
-IET x86 Neccessary Administrator 
+IET x86 Neccessary Administrator (STABLE)
 https://drive.google.com/file/d/1rWu3BSwtPd6Gm8KXPsJrx_8PIROSp8mH/view?usp=sharing
 
 IET Presentation PDF
