@@ -18,7 +18,7 @@ Updates
 ##########################################################
 
 ***** NEW ***** PURE VERSION *****
-IETv2Pure Drive https://drive.google.com/file/d/1Ayyy2X8mMiRd6U82k6UsbiY4IdrtSNFx/view?usp=sharing
+IETv2Pure Drive https://drive.google.com/file/d/1yY0oQZ4Srt6Dugvj6eqgf3MQE4684USf/view?usp=sharing
 
 Version 1.0.2 Erase update of scanned data outputs after all operations so that the data is not mixed. Tue 12 Apr 09:25 P.M
 
