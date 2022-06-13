@@ -18,7 +18,7 @@ Updates
 ##########################################################
 
 ***** NEW ***** PURE VERSION *****
-IETv2Pure Drive https://drive.google.com/file/d/1yY0oQZ4Srt6Dugvj6eqgf3MQE4684USf/view?usp=sharing
+IETPure Drive https://drive.google.com/file/d/1niL1qHoyqhrAARaWORMSvQLuCGBCX4nl/view?usp=sharing
 
 DLL
 https://drive.google.com/file/d/1wrH9Ps3vdyRO_a_WGQ9s2Kz9cFhJpOpk/view?usp=sharing
