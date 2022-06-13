@@ -20,6 +20,10 @@ Updates
 ***** NEW ***** PURE VERSION *****
 IETv2Pure Drive https://drive.google.com/file/d/1yY0oQZ4Srt6Dugvj6eqgf3MQE4684USf/view?usp=sharing
 
+DLL
+https://drive.google.com/file/d/1wrH9Ps3vdyRO_a_WGQ9s2Kz9cFhJpOpk/view?usp=sharing
+https://drive.google.com/file/d/1ed5IERnWexTBQegExJ2cc-3Lg4WGRwHD/view?usp=sharing
+
 Version 1.0.2 Erase update of scanned data outputs after all operations so that the data is not mixed. Tue 12 Apr 09:25 P.M
 
 Version 1.0.3 Add sound effects update. Wed 13 Apr 08:50 A.M.
