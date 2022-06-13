@@ -18,6 +18,7 @@ Updates
 ##########################################################
 
 ***** NEW ***** PURE VERSION *****
+Pure Files Drive https://drive.google.com/file/d/1yRdef_PyX8eCZIczCidfDksc8CPtyby4/view?usp=sharing
 IETPure Drive https://drive.google.com/file/d/1qWVbW0--fz3Y7sry0mvcTH0rjNq2smKe/view?usp=sharing
 
 DLL
