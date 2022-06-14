@@ -1,5 +1,6 @@
 # IET-Desktop
 
+New Version Pure  
 
 How to use?
 
@@ -17,13 +18,11 @@ Updates
 
 ##########################################################
 
-***** NEW ***** PURE VERSION *****
-Pure Files Drive https://drive.google.com/file/d/1yRdef_PyX8eCZIczCidfDksc8CPtyby4/view?usp=sharing
-IETPure Drive https://drive.google.com/file/d/1qWVbW0--fz3Y7sry0mvcTH0rjNq2smKe/view?usp=sharing
-
-DLL
-https://drive.google.com/file/d/1wrH9Ps3vdyRO_a_WGQ9s2Kz9cFhJpOpk/view?usp=sharing
-https://drive.google.com/file/d/1ed5IERnWexTBQegExJ2cc-3Lg4WGRwHD/view?usp=sharing
+ NEW PURE VERSION 
+ 
+ 
+ 
+##########################################################
 
 Version 1.0.2 Erase update of scanned data outputs after all operations so that the data is not mixed. Tue 12 Apr 09:25 P.M
 
@@ -34,6 +33,8 @@ Version 1.0.4 Performance Updates Thu 14 Apr 05.06 P.M.
 Version 1.0.5 Text Reading Performance Update Sun 17 Apr 11.20 A.M.
 
 Version 2 for Desktop Sun 24 Apr 10.13 P.M. 
+
+Version Pure for Desktop 14 June Tuesday 14.06.2022 09.26 A.M. 
 
 IET x64 Not Neccessary Administrator 
 https://drive.google.com/file/d/1QtTGU5c84_jpQw2hTp_RiqJfw42Wn02y/view?usp=sharing
@@ -61,6 +62,13 @@ https://drive.google.com/file/d/1FXFkRqh8UTPZYwBXx9jEsXp3WBFF8EMw/view?usp=shari
 
 IET Sign Certificate 
 https://drive.google.com/file/d/1zgIr50uSkG5j994C9bOL6QG-yNWowJI4/view?usp=sharing
+
+DLL
+https://drive.google.com/file/d/1wrH9Ps3vdyRO_a_WGQ9s2Kz9cFhJpOpk/view?usp=sharing
+https://drive.google.com/file/d/1ed5IERnWexTBQegExJ2cc-3Lg4WGRwHD/view?usp=sharing
+
+Pure Files Drive https://drive.google.com/file/d/1yRdef_PyX8eCZIczCidfDksc8CPtyby4/view?usp=sharing
+IETPure Drive https://drive.google.com/file/d/1qWVbW0--fz3Y7sry0mvcTH0rjNq2smKe/view?usp=sharing
 
 
 ##########################################################
