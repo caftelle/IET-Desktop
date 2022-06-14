@@ -22,6 +22,8 @@ Updates
  
  https://drive.google.com/file/d/1bdS4INbmrBCoCrYjgIwAefV_3mnamBhv/view?usp=sharing
  
+ https://drive.google.com/file/d/17UN3Qpe_Bd0q1-ZF0vbSdvMSB_9y5crf/view?usp=sharing
+ 
 ##########################################################
 
 Version 1.0.2 Erase update of scanned data outputs after all operations so that the data is not mixed. Tue 12 Apr 09:25 P.M
